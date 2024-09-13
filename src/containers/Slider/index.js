@@ -12,7 +12,8 @@ const Slider = () => {
   );
   const nextCard = () => {
     setTimeout(
-      () => setIndex(index < byDateDesc.length ? index + 1 : 0),
+      // tableau modifié pour commencer à 0 et enlever l'erreur undefined +1 à index ? à bydatedesc
+      () => setIndex(index + 1 < byDateDesc?.length ? index + 1 : 0),
       5000
     );
   };
@@ -21,15 +22,17 @@ const Slider = () => {
   });
   return (
     <div className="SlideCardList">
+      {/* delete mauvaise encapsulation */}
       {byDateDesc?.map((event, idx) => (
-        <>
-          <div
-            key={event.title}
-            className={`SlideCard SlideCard--${
+          /* remplace .title par .date pour ID unique à chaque slider */
+          <div key={event.date}>
+            <div className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"
             }`}
           >
-            <img src={event.cover} alt="forum" />
+                 {/* renseignement de l'image correspondante en modif alt */}
+            <img src={event.cover} alt={event.title} />
+     
             <div className="SlideCard__descriptionContainer">
               <div className="SlideCard__description">
                 <h3>{event.title}</h3>
@@ -42,15 +45,17 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => (
                 <input
-                  key={`${event.id}`}
+                  key={_.date}
+                  // modif key pour correspondre au slider
                   type="radio"
                   name="radio-button"
-                  checked={idx === radioIdx}
+                  checked={index === radioIdx}
+                  // indiquer sur quelle image on se trouve avec index à la place de idx
                 />
               ))}
             </div>
           </div>
-        </>
+        </div>
       ))}
     </div>
   );
