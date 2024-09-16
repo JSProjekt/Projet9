@@ -22,8 +22,8 @@ describe("When Form is created", () => {
         })
       );
       await screen.findByText("En cours");
-      await waitFor(() => screen.findByText("Envoyer"));
-      // add a waitFor pour tester asynchrone
+      await waitFor(() => screen.findByText("Message evoyé !"), { timeout: 1000 });
+      // add a waitFor pour tester asynchrone et attente de l'affichage du message
       expect(onSuccess).toHaveBeenCalled();
     });
   });
