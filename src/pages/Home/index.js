@@ -125,7 +125,8 @@ const Page = () => {
           title={last.title}
           date={new Date(last.date)}
           small
-          label="Dernier événement"
+          label={last.type}
+          data-testid="newEvent"
         />}
       </div>
       <div className="col contact">

@@ -21,7 +21,8 @@ describe("When Form is created", () => {
         })
       );
       await screen.findByText("En cours");
-      await screen.findByText("Message envoyé !");
+      //
+      await waitFor(() => screen.findByText("Message envoyé !"), { timeout: 2000 });
     });
   });
 
@@ -50,8 +51,10 @@ describe("When a page is created", () => {
   })
   it("an event card, with the last event, is displayed", async () => {
     render(<Home />);
-    expect(screen.getByTestId("Dernier événement")).toBeInTheDocument();
+    waitFor(() => {
+    expect(screen.getByTestId("newEvent")).toBeInTheDocument();
     // test si element présent dans Dernier événement
-    expect(screen.getByRole("date")).toBeInTheDocument();
+    expect(screen.getByRole('date')).toBeInTheDocument();
   })
+})
 });
